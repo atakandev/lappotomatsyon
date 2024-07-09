@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .list-disc {
+            list-style-type: none;
+            /* Liste işaretlerini kaldır */
+            padding-left: 1rem;
+            /* Sol iç boşluğu ayarla */
+        }
+
+        .list-item {
+            display: flex;
+            /* Öğeleri yatay hizala */
+            justify-content: space-between;
+            /* Aralarında boşluk bırak */
+            align-items: center;
+            /* Dikeyde ortala */
+            margin-bottom: 0.5rem;
+            /* Alt boşluk ayarla */
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Yeşil arka plan */
+            border: none;
+            /* Kenarlık yok */
+            color: white;
+            /* Beyaz metin */
+            text-align: center;
+            /* Metni ortala */
+            text-decoration: none;
+            /* Alt çizgi yok */
+            display: inline-block;
+            /* Blok içi öğe */
+            font-size: 12px;
+            /* Yazı boyutu */
+            padding: 2px 5px;
+            /* Yastıklama */
+            transition-duration: 0.4s;
+            /* Geçiş süresi */
+            font-weight: bold;
+            cursor: pointer;
+            /* İşaretçi el simgesi */
+            border-radius: 8px;
+            /* Kenar yarıçapı */
+        }
+
+        .button:hover {
+            background-color: #3e8e41;
+            /* Yeşil hover arka plan */
+            color: white;
+            /* Beyaz metin */
+        }
+
+        /* Input alanı stil ayarları */
+        .input-field {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .update-message {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #4CAF50;
+            color: white;
+            display: none;
+            /* Başlangıçta gizli */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col p-2 h-screen">
+        <h1 class="text-5xl font-bold text-center">RESTAURANT</h1>
+        <div class="flex justify-center mt-10 flex-wrap gap-x-4">
+            <div class="flex justify-center mt-10 flex-wrap gap-x-4">
+                <div class="menu-item">
+                    <a href="/anayemek" class="menu-link bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        ANA YEMEK
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/baslangic"
+                    class="menu-link bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        BAŞLANGIÇ
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/atistirmalik"
+                        class="menu-link bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                        ATIŞTIRMALIK
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/burgerler"
+                    class="menu-link bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                        BURGERLER
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/pizzalar"
+                    class="menu-link bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                        PİZZALAR
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/cocuk"
+                    class="menu-link bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        ÇOCUK
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/makarnalar"
+                    class="menu-link bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                        MAKARNALAR
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/denizmahsulleri"
+                    class="menu-link bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        DENİZ
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/salatalar"
+                    class="menu-link bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        SALATA
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/sandwhich"
+                    class="menu-link bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                        SANDWHİCH
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/tatli"
+                    class="menu-link bg-yellow-600 hover:bg-yellow-800 text-white font-bold py-2 px-4 rounded">
+                        TATLI
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/tortilla"
+                    class="menu-link bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
+                        TORTİLLA WRAP
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

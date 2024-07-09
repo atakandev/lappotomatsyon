@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .list-disc {
+            list-style-type: none;
+            /* Liste işaretlerini kaldır */
+            padding-left: 1rem;
+            /* Sol iç boşluğu ayarla */
+        }
+
+        .list-item {
+            display: flex;
+            /* Öğeleri yatay hizala */
+            justify-content: space-between;
+            /* Aralarında boşluk bırak */
+            align-items: center;
+            /* Dikeyde ortala */
+            margin-bottom: 0.5rem;
+            /* Alt boşluk ayarla */
+        }
+
+        .button {
+            background-color: #4CAF50;
+            /* Yeşil arka plan */
+            border: none;
+            /* Kenarlık yok */
+            color: white;
+            /* Beyaz metin */
+            text-align: center;
+            /* Metni ortala */
+            text-decoration: none;
+            /* Alt çizgi yok */
+            display: inline-block;
+            /* Blok içi öğe */
+            font-size: 12px;
+            /* Yazı boyutu */
+            padding: 2px 5px;
+            /* Yastıklama */
+            transition-duration: 0.4s;
+            /* Geçiş süresi */
+            font-weight: bold;
+            cursor: pointer;
+            /* İşaretçi el simgesi */
+            border-radius: 8px;
+            /* Kenar yarıçapı */
+        }
+
+        .button:hover {
+            background-color: #3e8e41;
+            /* Yeşil hover arka plan */
+            color: white;
+            /* Beyaz metin */
+        }
+
+        /* Input alanı stil ayarları */
+        .input-field {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .update-message {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #4CAF50;
+            color: white;
+            display: none;
+            /* Başlangıçta gizli */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col p-2 h-screen">
+        <h1 class="text-5xl text-center">L HOTEL APP</h1>
+        <div class="flex flex-wrap gap-x-4">
+            <ul id="productList" class="text-sm" style="width: 650px;">
+                <!-- Products will be dynamically added here -->
+            </ul>
+
+            <!-- Güncelleme formu -->
+            <form id="updateForm" class="hidden">
+                <div id="updateMessage" class="update-message">
+                    Ürün başarıyla güncellendi.
+                </div>
+                <input type="text" id="updateName" class="input-field" placeholder="Ürün Adı" required>
+                <input type="number" id="updatePrice" class="input-field" placeholder="Ürün Fiyatı" required>
+                <button type="submit" class="button">Güncelle</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // API'den ürünleri getirme
+        fetch('https://lapi.atakanyildirim.com.tr/api/products/BAR/COCKTAILS')
+            .then(response => response.json())
+            .then(data => {
+                const productList = document.getElementById('productList');
+
+                // Her ürün için liste öğesi oluştur
+                data.forEach(product => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('list-item');
+
+                    // Ürün adı
+                    const spanName = document.createElement('div');
+                    spanName.textContent = product.name;
+                    listItem.appendChild(spanName);
+                    spanName.classList.add('w-1/2')
+                    // Fiyat
+                    const spanPrice = document.createElement('div');
+                    spanPrice.textContent = `${product.price} ₺`;
+                    listItem.appendChild(spanPrice);
+                    spanPrice.classList.add('w-1/2')
+                    // "Değiştir" düğmesi oluştur
+                    const button = document.createElement('button');
+                    button.classList.add('button');
+                    button.textContent = 'Değiştir';
+                    button.addEventListener('click', () => {
+                        // Düğmeye tıklandığında input alanlarına ürün bilgilerini yerleştir
+                        document.getElementById('updateName').value = product.name;
+                        document.getElementById('updatePrice').value = product.price;
+                        // Güncelleme formunu göster
+                        document.getElementById('updateForm').classList.remove('hidden');
+                        // Güncelleme işlemi için ürün ID'sini form elementine ekle
+                        document.getElementById('updateForm').setAttribute('data-product-id', product._id);
+                    });
+
+                    listItem.appendChild(button);
+                    productList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                alert('Error fetching data. Please try again.');
+            });
+
+        // Güncelleme formunu gönderme işlemi
+        document.getElementById('updateForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const updateName = document.getElementById('updateName').value;
+            const updatePrice = document.getElementById('updatePrice').value;
+            const productId = document.getElementById('updateForm').getAttribute('data-product-id');
+
+            // Güncelleme işlemi için API isteği
+            try {
+                const response = await fetch(`https://lapi.atakanyildirim.com.tr/api/products/${productId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: updateName,
+                        price: updatePrice
+                    })
+                });
+
+                if (response.ok) {
+                    // 3 saniye sonra sayfayı yenile
+                    document.getElementById('updateMessage').style.display = 'block';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    alert('Ürün güncellenirken bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Error updating product:', error);
+                alert('Ürün güncellenirken bir hata oluştu. Lütfen tekrar deneyin.');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oda Bilgileri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .list-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .input-field {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .update-message {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #4CAF50;
+            color: white;
+            display: none;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            padding: 0.5rem 1rem;
+            transition-duration: 0.4s;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .buttoncOut {
+            background-color: #ef5740;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            padding: 0.5rem 1rem;
+            transition-duration: 0.4s;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .buttoncOut:hover {
+            background-color: #dd3737;
+        }
+
+        .list-item {
+            display: unset !important;
+            border-left: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-5">YENİ KAYIT</h1>
+        <div id="roomList" class="flex flex-wrap bg-white p-4 rounded shadow-md">
+            <!-- Odalar dinamik olarak buraya eklenecek -->
+        </div>
+        <div class="flex flex-wrap gap-x-4 mt-5">
+            <div class="flex gap-x-4">
+                <div id="roomDetails" class="hidden w-[400px] bg-white p-4 rounded shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Oda Bilgileri</h2>
+                    <div id="roomInfo">
+                        <!-- Oda bilgileri dinamik olarak buraya eklenecek -->
+                    </div>
+                    <div class="flex justify-between">
+                        <button id="editButton" class="button">Düzenle</button>
+                        <button id="cOut" class="buttoncOut">CHECK-OUT</button>
+                    </div>
+
+                </div>
+                <form id="updateForm" class="hidden w-full bg-white p-4 rounded shadow-md">
+                    <h2 class="text-2xl font-bold mb-4">Oda Güncelleme</h2>
+
+                    <input id="updateRoomNo" name="roomNo" type="hidden" class="input-field">
+                    <div class="flex gap-x-4">
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest1">Misafir
+                                1</label>
+                            <input id="updateGuest1" name="guest1" type="text" placeholder="Misafir 1"
+                                class="input-field" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest1BirthDate">Doğum
+                                Tarihi</label>
+                            <input id="updateGuest1BirthDate" name="guest1birthDate" type="date" class="input-field"
+                                required>
+                        </div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest2">Misafir
+                                2</label>
+                            <input id="updateGuest2" name="guest2" type="text" placeholder="Misafir 2"
+                                class="input-field">
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest2BirthDate">Doğum
+                                Tarihi</label>
+                            <input id="updateGuest2BirthDate" name="guest2birthDate" type="date" class="input-field">
+                        </div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest3">Misafir
+                                3</label>
+                            <input id="updateGuest3" name="guest3" type="text" placeholder="Misafir 3"
+                                class="input-field">
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest3BirthDate">Doğum
+                                Tarihi</label>
+                            <input id="updateGuest3BirthDate" name="guest3birthDate" type="date" class="input-field">
+                        </div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest4">Misafir
+                                4</label>
+                            <input id="updateGuest4" name="guest4" type="text" placeholder="Misafir 4"
+                                class="input-field">
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest4BirthDate">Doğum
+                                Tarihi</label>
+                            <input id="updateGuest4BirthDate" name="guest4birthDate" type="date" class="input-field">
+                        </div>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest5">Misafir
+                                5</label>
+                            <input id="updateGuest5" name="guest5" type="text" placeholder="Misafir 5"
+                                class="input-field">
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-gray-700 text-sm font-bold" for="updateGuest5BirthDate">Doğum
+                                Tarihi</label>
+                            <input id="updateGuest5BirthDate" name="guest5birthDate" type="date" class="input-field">
+                        </div>
+                    </div>
+                    <!-- Diğer misafir ve doğum tarihi alanları buraya eklenebilir -->
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold" for="updateMail">Email</label>
+                        <input id="updateMail" name="mail" type="email" placeholder="Email" class="input-field">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold" for="updatePhone">Telefon</label>
+                        <input id="updatePhone" name="phone" type="tel" placeholder="Telefon" class="input-field">
+                    </div>
+
+                    <div id="updateMessage" class="update-message">
+                        Oda başarıyla güncellendi.
+                    </div>
+                    <button type="submit" class="button">Kaydet</button>
+                </form>
+            </div>
+
+
+            <!-- Güncelleme formu -->
+
+        </div>
+    </div>
+
+    <script>
+        // API'den odaları getirme
+        fetch('https://lapi.atakanyildirim.com.tr/api/rooms')
+            .then(response => response.json())
+            .then(data => {
+                const roomList = document.getElementById('roomList');
+
+                // Her oda için liste öğesi oluştur
+                data.forEach(room => {
+                    const listItem = document.createElement('div');
+                    listItem.classList.add('list-item');
+                    listItem.classList.add('font-bold');
+                    listItem.textContent = `${room.roomNo}`;
+                    listItem.addEventListener('click', () => showRoomDetails(room));
+                    roomList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                alert('Error fetching data. Please try again.');
+            });
+
+        function showRoomDetails(room) {
+            const roomDetails = document.getElementById('roomDetails');
+            const roomInfo = document.getElementById('roomInfo');
+            const updateForm = document.getElementById('updateForm');
+
+            roomInfo.innerHTML = `
+                <p><strong>${room.roomNo}</strong> </p>
+                <div class="flex justify-between">
+                 <p><strong>Misafir:</strong> ${room.guest1}</p>
+                <p><strong>Doğum Tarihi:</strong> ${room.guest1birthDate ? room.guest1birthDate.split('T')[0] : 'N/A'}</p>
+                </div>
+                <div class="flex justify-between">
+                 <p><strong>Misafir:</strong> ${room.guest2}</p>
+                <p><strong>Doğum Tarihi:</strong> ${room.guest2birthDate ? room.guest2birthDate.split('T')[0] : 'N/A'}</p>
+                </div>
+                <div class="flex justify-between">
+                 <p><strong>Misafir:</strong> ${room.guest3}</p>
+                <p><strong>Doğum Tarihi:</strong> ${room.guest3birthDate ? room.guest3birthDate.split('T')[0] : 'N/A'}</p>
+                </div>
+                <div class="flex justify-between">
+                 <p><strong>Misafir:</strong> ${room.guest4}</p>
+                <p><strong>Doğum Tarihi:</strong> ${room.guest4birthDate ? room.guest4birthDate.split('T')[0] : 'N/A'}</p>
+                </div>
+                <div class="flex justify-between">
+                 <p><strong>Misafir:</strong> ${room.guest5}</p>
+                <p><strong>Doğum Tarihi:</strong> ${room.guest5birthDate ? room.guest5birthDate.split('T')[0] : 'N/A'}</p>
+                </div>
+                <p><strong>Email:</strong> ${room.mail}</p>
+                <p><strong>Telefon:</strong> ${room.phone}</p>
+            `;
+
+            document.getElementById('editButton').onclick = () => editRoom(room);
+            document.getElementById('cOut').onclick = () => checkOutRoom(room);
+            roomDetails.classList.remove('hidden');
+            updateForm.classList.add('hidden');
+        }
+
+        function editRoom(room) {
+            const updateForm = document.getElementById('updateForm');
+            const roomDetails = document.getElementById('roomDetails');
+
+            document.getElementById('updateRoomNo').value = room.roomNo;
+            document.getElementById('updateGuest1').value = room.guest1;
+            document.getElementById('updateGuest1BirthDate').value = room.guest1birthDate ? room.guest1birthDate.split('T')[0] : '';
+            document.getElementById('updateGuest2').value = room.guest2;
+            document.getElementById('updateGuest2BirthDate').value = room.guest2birthDate ? room.guest2birthDate.split('T')[0] : '';
+            document.getElementById('updateGuest3').value = room.guest3;
+            document.getElementById('updateGuest3BirthDate').value = room.guest3birthDate ? room.guest3birthDate.split('T')[0] : '';
+            document.getElementById('updateGuest4').value = room.guest4;
+            document.getElementById('updateGuest4BirthDate').value = room.guest4birthDate ? room.guest4birthDate.split('T')[0] : '';
+            document.getElementById('updateGuest5').value = room.guest5;
+            document.getElementById('updateGuest5BirthDate').value = room.guest5birthDate ? room.guest5birthDate.split('T')[0] : '';
+            // Diğer misafir ve doğum tarihi alanları burada doldurulabilir
+            document.getElementById('updateMail').value = room.mail;
+            document.getElementById('updatePhone').value = room.phone;
+
+            roomDetails.classList.add('hidden');
+            updateForm.classList.remove('hidden');
+        }
+        async function checkOutRoom(room) {
+            try {
+                const response = await fetch('https://lapi.atakanyildirim.com.tr/api/checkOutRoom', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomNo: room.roomNo,
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('updateMessage').style.display = 'block';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    alert('Oda güncellenirken bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Error updating room:', error);
+                alert('Oda güncellenirken bir hata oluştu. Lütfen tekrar deneyin.');
+            }
+        }
+        // Güncelleme formunu gönderme işlemi
+        document.getElementById('updateForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const roomNo = document.getElementById('updateRoomNo').value;
+            const guest1 = document.getElementById('updateGuest1').value;
+            const guest1birthDate = document.getElementById('updateGuest1BirthDate').value;
+            const guest2 = document.getElementById('updateGuest2').value;
+            const guest2birthDate = document.getElementById('updateGuest2BirthDate').value;
+            const guest3 = document.getElementById('updateGuest3').value;
+            const guest3birthDate = document.getElementById('updateGuest3BirthDate').value;
+            const guest4 = document.getElementById('updateGuest4').value;
+            const guest4birthDate = document.getElementById('updateGuest4BirthDate').value;
+            const guest5 = document.getElementById('updateGuest5').value;
+            const guest5birthDate = document.getElementById('updateGuest5BirthDate').value;
+            // Diğer misafir ve doğum tarihi değerlerini burada alın
+            const mail = document.getElementById('updateMail').value;
+            const phone = document.getElementById('updatePhone').value;
+
+            try {
+                const response = await fetch('https://lapi.atakanyildirim.com.tr/api/setNewCheckIn', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomNo,
+                        guest1,
+                        guest1birthDate,
+                        guest2,
+                        guest2birthDate,
+                        guest3,
+                        guest3birthDate,
+                        guest4,
+                        guest4birthDate,
+                        guest5,
+                        guest5birthDate,
+                        mail,
+                        phone
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('updateMessage').style.display = 'block';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+                } else {
+                    alert('Oda güncellenirken bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Error updating room:', error);
+                alert('Oda güncellenirken bir hata oluştu. Lütfen tekrar deneyin.');
+            }
+        });
+    </script>
+</body>
+
+</html>
